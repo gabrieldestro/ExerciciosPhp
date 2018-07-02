@@ -77,7 +77,12 @@ class Resolucao implements TextWrapInterface {
     // Remove as linhas que são vazias ou espaços em branco
     $ret = $this->removeBlankLine ($ret, $retIndex);
     $ret = array_values($ret);
-    print_r($ret);
+
+    // Caso a string de entrada for vazia, o vetor retornado deve ser vazio
+    if (empty($ret[0])) {
+         return [""];
+    }
+
     return $ret;
     }
     
@@ -116,6 +121,8 @@ class Resolucao implements TextWrapInterface {
         for ($i = 0; $i < $size; $i++) {
             if (empty($vet[$i]) || $vet[$i] == " ") {
                 unset($vet[$i]);
+            } else {
+	    	$vet[$i] = trim($vet[$i]);
             }
         }
         return $vet;
